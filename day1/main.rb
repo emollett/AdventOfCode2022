@@ -15,10 +15,17 @@ module Day1
       sums
     end
 
+    def top_three
+      sorted = sums.sort { |a, z| z <=> a }
+      sorted[0..2]
+    end
+
     def part1
       sums.max
     end
 
-    def part2; end
+    def part2
+      top_three.sum
+    end
   end
 end

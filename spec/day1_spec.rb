@@ -20,6 +20,14 @@ describe Day1::Main do
     it 'returns the highest calories' do
       expect(puzzle.part1).to eq(24_000)
     end
+
+    it 'returns the top three calories' do
+      expect(puzzle.top_three).to eq([24_000, 11_000, 10_000])
+    end
+
+    it 'returns the sum of the top three calories' do
+      expect(puzzle.part2).to eq(45_000)
+    end
   end
 
   context 'when using the real data' do
@@ -29,7 +37,7 @@ describe Day1::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq(203203)
     end
   end
 end
