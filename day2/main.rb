@@ -12,8 +12,9 @@ module Day2
       scores = []
       strategy_guide.each do |hand|
         hand = hand.split.map(&:to_i)
-        score = if hand[0] > hand[1]
-                  hand[1]
+        score = if hand[0] == 1 && hand[1] == 3 then hand[1]
+                elsif hand[0] == 3 && hand[1] == 1 then hand[1] + 6
+                elsif hand[0] > hand[1] then hand[1]
                 elsif hand[0] < hand[1] then hand[1] + 6
                 else hand[1] + 3
                 end
