@@ -1,6 +1,6 @@
 module Day1
   class Main
-    attr_accessor :inventory
+    attr_accessor :strategy_guide
 
     def initialize(input)
       @inventory = input.split("\n\n")
