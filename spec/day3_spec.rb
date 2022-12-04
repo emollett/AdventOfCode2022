@@ -10,11 +10,12 @@ describe Day3::Main do
     let(:puzzle) { Day3::Main.new(test_input) }
 
     it 'parses the input into rucksacks' do
-      expect(puzzle.rucksacks).to eq([["vJrwpWtwJgWr", "hcsFMMfFFhFp"], ["jqHRNqRjqzjGDLGL", "rsFMfFZSrLrFZsSL"], ["PmmdzqPrV", "vPwwTWBwg"], ["wMqvLMZHhHMvwLH", "jbvcjnnSBnvTQFn"], ["ttgJtRGJ", "QctTZtZT"], ["CrZsJsPPZsGz", "wwsLwLmpwMDw"]])
+      expect(puzzle.rucksacks).to eq([%w[vJrwpWtwJgWr hcsFMMfFFhFp], %w[jqHRNqRjqzjGDLGL rsFMfFZSrLrFZsSL],
+                                      %w[PmmdzqPrV vPwwTWBwg], %w[wMqvLMZHhHMvwLH jbvcjnnSBnvTQFn], %w[ttgJtRGJ QctTZtZT], %w[CrZsJsPPZsGz wwsLwLmpwMDw]])
     end
 
     it 'finds the items in both rucksacks' do
-      expect(puzzle.find_matching_item).to eq(['p', 'L', 'P', 'v', 't', 's' ])
+      expect(puzzle.find_matching_item).to eq(%w[p L P v t s])
     end
 
     it 'prioritises the items' do
@@ -27,18 +28,20 @@ describe Day3::Main do
     end
 
     it 'gets the groups' do
-      expect(puzzle.get_groups).to eq([['vJrwpWtwJgWrhcsFMMfFFhFp', 'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL', 'PmmdzqPrVvPwwTWBwg'], ['wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn', 'ttgJtRGJQctTZtZT', 'CrZsJsPPZsGzwwsLwLmpwMDw']])
+      expect(puzzle.get_groups).to eq([
+                                        %w[vJrwpWtwJgWrhcsFMMfFFhFp jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+                                           PmmdzqPrVvPwwTWBwg], %w[wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn ttgJtRGJQctTZtZT CrZsJsPPZsGzwwsLwLmpwMDw]
+                                      ])
     end
 
     it 'finds the badge in each group' do
       groups = puzzle.get_groups
-      expect(puzzle.find_badge(groups)).to eq(['r', 'Z'])
+      expect(puzzle.find_badge(groups)).to eq(%w[r Z])
     end
 
     it 'sums the badge values' do
       expect(puzzle.part2).to eq(70)
     end
-
   end
 
   context 'when using the real data' do

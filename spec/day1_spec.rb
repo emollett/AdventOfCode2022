@@ -37,7 +37,7 @@ describe Day1::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(203203)
+      expect(puzzle.part2).to eq(203_203)
     end
   end
 end

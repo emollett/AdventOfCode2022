@@ -9,16 +9,17 @@ module Day2
     def get_hand
       new_hands = []
       strategy_guide.each do |hand|
-        new_hand = if hand == "A Z" then "A Y"
-                elsif hand == "A Y" then "A X"
-                elsif hand == "A X" then "A Z"
-                elsif hand == "B Z" then "B Z"
-                elsif hand == "B Y" then "B Y"
-                elsif hand == "B X" then "B X"
-                elsif hand == "C Z" then "C X"
-                elsif hand == "C Y" then "C Z"
-                elsif hand == "C X" then "C Y"
-                end
+        new_hand = case hand
+                   when 'A Z' then 'A Y'
+                   when 'A Y' then 'A X'
+                   when 'A X' then 'A Z'
+                   when 'B Z' then 'B Z'
+                   when 'B Y' then 'B Y'
+                   when 'B X' then 'B X'
+                   when 'C Z' then 'C X'
+                   when 'C Y' then 'C Z'
+                   when 'C X' then 'C Y'
+                   end
         new_hands.push(new_hand)
       end
       new_hands
@@ -27,15 +28,16 @@ module Day2
     def get_hand_scores(guide = strategy_guide)
       scores = []
       guide.each do |hand|
-        score = if hand == "A Z" then 3
-                elsif hand == "A Y" then 2 + 6
-                elsif hand == "A X" then 1 + 3
-                elsif hand == "B Z" then 3 + 6
-                elsif hand == "B Y" then 2 + 3
-                elsif hand == "B X" then 1
-                elsif hand == "C Z" then 3 + 3
-                elsif hand == "C Y" then 2
-                elsif hand == "C X" then 1 + 6
+        score = case hand
+                when 'A Z' then 3
+                when 'A Y' then 2 + 6
+                when 'A X' then 1 + 3
+                when 'B Z' then 3 + 6
+                when 'B Y' then 2 + 3
+                when 'B X' then 1
+                when 'C Z' then 3 + 3
+                when 'C Y' then 2
+                when 'C X' then 1 + 6
                 end
         scores.push(score)
       end

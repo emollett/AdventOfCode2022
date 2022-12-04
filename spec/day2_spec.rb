@@ -10,7 +10,7 @@ describe Day2::Main do
     let(:puzzle) { Day2::Main.new(test_input) }
 
     it 'parses the input into inventory' do
-      expect(puzzle.strategy_guide).to eq(["A Y", "B X", "C Z", "A Z", "C X"])
+      expect(puzzle.strategy_guide).to eq(['A Y', 'B X', 'C Z', 'A Z', 'C X'])
     end
 
     it 'gets the score for each hand' do
@@ -22,7 +22,7 @@ describe Day2::Main do
     end
 
     it 'gets your hand' do
-      expect(puzzle.get_hand).to eq(["A X", "B X", "C X", "A Y", "C Y"])
+      expect(puzzle.get_hand).to eq(['A X', 'B X', 'C X', 'A Y', 'C Y'])
     end
 
     it 'calculates your total score' do
@@ -33,11 +33,11 @@ describe Day2::Main do
   context 'when using the real data' do
     let(:puzzle) { Day2::Main.new(input) }
     it 'returns the answer to part 1' do
-      expect(puzzle.part1).to eq(10718)
+      expect(puzzle.part1).to eq(10_718)
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(14652)
+      expect(puzzle.part2).to eq(14_652)
     end
   end
 end

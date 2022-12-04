@@ -1,12 +1,11 @@
 module Day3
   class Main
-    attr_accessor :rucksacks
-    attr_accessor :matching_items
+    attr_accessor :rucksacks, :matching_items
 
     def initialize(input)
       @rucksacks = []
       input.dup.split("\n").each do |contents|
-        first,second = contents.partition(/.{#{contents.size/2}}/)[1,2]
+        first, second = contents.partition(/.{#{contents.size / 2}}/)[1, 2]
         rucksacks.push([first, second])
       end
       @matching_items = []
@@ -24,20 +23,21 @@ module Day3
       values = []
       value_map = ('a'..'z').to_a | ('A'..'Z').to_a
       matching_items.each do |item|
-        value = value_map.index(item) + 1  
+        value = value_map.index(item) + 1
         values.push(value)
       end
       values
     end
 
     def get_groups
-      i=0
+      i = 0
       groups = []
-      while i < rucksacks.size do
+      while i < rucksacks.size
         group = []
-        group.push(rucksacks[i][0] << rucksacks[i][1], rucksacks[i+1][0] << rucksacks[i+1][1], rucksacks[i+2][0] << rucksacks[i+2][1])
+        group.push(rucksacks[i][0] << rucksacks[i][1], rucksacks[i + 1][0] << rucksacks[i + 1][1],
+                   rucksacks[i + 2][0] << rucksacks[i + 2][1])
         groups.push(group)
-        i = i+3
+        i += 3
       end
       groups
     end
