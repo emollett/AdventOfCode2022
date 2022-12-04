@@ -5,7 +5,7 @@ module Day3
 
     def initialize(input)
       @rucksacks = []
-      input.split("\n").each do |contents|
+      input.dup.split("\n").each do |contents|
         first,second = contents.partition(/.{#{contents.size/2}}/)[1,2]
         rucksacks.push([first, second])
       end
@@ -30,12 +30,34 @@ module Day3
       values
     end
 
+    def get_groups
+      i=0
+      groups = []
+      while i < rucksacks.size do
+        group = []
+        group.push(rucksacks[i][0] << rucksacks[i][1], rucksacks[i+1][0] << rucksacks[i+1][1], rucksacks[i+2][0] << rucksacks[i+2][1])
+        groups.push(group)
+        i = i+3
+      end
+      groups
+    end
+
+    def find_badge(groups)
+      groups.each do |group|
+        matching = group[0].chars & group[1].chars & group[2].chars
+        matching_items.push(matching[0])
+      end
+      matching_items
+    end
+
     def part1
       find_matching_item
       prioritize.sum
     end
 
-    def part2;
+    def part2
+      find_badge(get_groups)
+      prioritize.sum
     end
   end
 end

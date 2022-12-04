@@ -14,7 +14,6 @@ describe Day3::Main do
     end
 
     it 'finds the items in both rucksacks' do
-      pp ('a'..'z').to_a | ('A'..'Z').to_a
       expect(puzzle.find_matching_item).to eq(['p', 'L', 'P', 'v', 't', 's' ])
     end
 
@@ -26,6 +25,20 @@ describe Day3::Main do
     it 'sums the values' do
       expect(puzzle.part1).to eq(157)
     end
+
+    it 'gets the groups' do
+      expect(puzzle.get_groups).to eq([['vJrwpWtwJgWrhcsFMMfFFhFp', 'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL', 'PmmdzqPrVvPwwTWBwg'], ['wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn', 'ttgJtRGJQctTZtZT', 'CrZsJsPPZsGzwwsLwLmpwMDw']])
+    end
+
+    it 'finds the badge in each group' do
+      groups = puzzle.get_groups
+      expect(puzzle.find_badge(groups)).to eq(['r', 'Z'])
+    end
+
+    it 'sums the badge values' do
+      expect(puzzle.part2).to eq(70)
+    end
+
   end
 
   context 'when using the real data' do
@@ -35,7 +48,7 @@ describe Day3::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq(2821)
     end
   end
 end
