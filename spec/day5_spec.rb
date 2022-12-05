@@ -14,13 +14,18 @@ describe Day5::Main do
       expect(puzzle.stacks).to eq([nil, ["Z", "N"], ["M", "C", "D"], ["P"]])
     end
 
-    it 'moves boxes between stacks' do
-      puzzle.move_boxes
+    it 'moves boxes between stacks with multiple moving one by one' do
+      puzzle.move_boxes_9000
       expect(puzzle.stacks).to eq([nil, ["C"], ["M"], ["P", "D", "N", "Z"]])
     end
 
     it 'finds the top boxes' do
       expect(puzzle.part1).to eq('CMZ')
+    end
+
+    it 'moves boxes between stacks with multiple moving all at once' do
+      puzzle.move_boxes_9001
+      expect(puzzle.stacks).to eq([nil, ["M"], ["C"], ["P", "Z", "N", "D"]])
     end
   end
 
@@ -32,7 +37,7 @@ describe Day5::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq("FSZWBPTBG")
     end
   end
 end

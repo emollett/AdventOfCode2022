@@ -18,7 +18,7 @@ module Day5
       @stacks = stacking
     end
 
-    def move_boxes
+    def move_boxes_9000
       instructions.each do |instruction|
         boxes_to_move = instruction[0].to_i
         start_stack = instruction[1].to_i
@@ -26,12 +26,20 @@ module Day5
         boxes_to_move.times do
           stacks[end_stack].push(stacks[start_stack].pop)
         end
+      end
+    end
 
+    def move_boxes_9001
+      instructions.each do |instruction|
+        boxes_to_move = instruction[0].to_i
+        start_stack = instruction[1].to_i
+        end_stack = instruction[2].to_i
+        stacks[end_stack].push(*stacks[start_stack].pop(boxes_to_move))
       end
     end
 
     def part1
-      move_boxes
+      move_boxes_9000
       crates = ""
       stacks.each do |stack|
         if stack != nil
@@ -41,6 +49,15 @@ module Day5
       crates
     end
 
-    def part2; end
+    def part2
+      move_boxes_9001
+      crates = ""
+      stacks.each do |stack|
+        if stack != nil
+          crates = crates + stack.pop
+        end
+      end
+      crates
+    end
   end
 end
