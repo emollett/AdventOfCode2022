@@ -25,6 +25,15 @@ module Day4
       contained_count
     end
 
-    def part2; end
+    def part2
+      sections = parse_sections
+      uncontained_count = 0
+      sections.each do |section|
+        if (section[0] < section[2] && section[1] < section[2]) || (section[0] > section[3] && section[1] > section[3])
+          uncontained_count += 1
+        end
+      end
+      sections.size - uncontained_count
+    end
   end
 end

@@ -21,6 +21,10 @@ describe Day4::Main do
     it 'calculates how many pairs completely contain the other' do
       expect(puzzle.part1).to eq(2)
     end
+
+    it 'calculates how many pairs contain the other' do
+      expect(puzzle.part2).to eq(4)
+    end
   end
 
   context 'when using the real data' do
@@ -30,7 +34,7 @@ describe Day4::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq(815)
     end
   end
 end
