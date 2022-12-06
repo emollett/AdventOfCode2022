@@ -6,20 +6,21 @@ module Day6
       @signal = input
     end
 
-    def find_start_marker
+    def find_start(size)
       signal_array = signal.chars
-      signal_array.to_enum.with_index(3) do |_c, i|
-        quartet = [signal_array[i], signal_array[i - 1], signal_array[i - 2], signal_array[i - 3]]
-        return i + 1 if quartet.uniq.size == 4
+      signal_array.to_enum.with_index(size - 1) do |_c, i|
+        quartet = signal_array[i - (size - 1)..i]
+        return i + 1 if quartet.uniq.size == size
       end
       nil
     end
 
     def part1
-      find_start_marker
+      find_start(4)
     end
 
-    def part2;
+    def part2
+      find_start(14)
     end
   end
 end

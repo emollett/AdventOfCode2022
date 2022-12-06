@@ -14,7 +14,11 @@ describe Day6::Main do
     end
 
     it 'finds the index of the start marker' do
-      expect(puzzle.find_start_marker).to eq(5)
+      expect(puzzle.part1).to eq(5)
+    end
+
+    it 'finds the index of the start of message marker' do
+      expect(puzzle.part2).to eq(23)
     end
 
   end
@@ -27,7 +31,7 @@ describe Day6::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq(2773)
     end
   end
 end
