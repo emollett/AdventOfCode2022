@@ -29,13 +29,21 @@ describe Day8::Main do
       expect(puzzle.part1).to eq(21)
     end
 
+    it 'gets the scenic scores' do
+      expect(puzzle.scenic_scores).to eq([1, 4, 1, 6, 1, 2, 1, 8, 3])
+    end
+
+    it 'finds the best scienic score' do
+      expect(puzzle.part2).to eq(8)
+    end
+
   end
 
   context 'when using the real data' do
     let(:puzzle) { described_class.new(input) }
 
     it 'returns the answer to part 1' do
-      expect(puzzle.part1).to eq(nil)
+      expect(puzzle.part1).to eq(1840)
     end
 
     it 'returns the answer to part 2' do

@@ -27,12 +27,32 @@ module Day8
       count
     end
 
+    def scenic_scores
+    scores = []
+    trees[1..-2].each_with_index do |row, j|
+      row[1..-2].each_with_index do |tree, i|
+        left = row[0..i]
+        right = row[i+2..-1]
+        up = rotated_trees[i+1][0..j]
+        down = rotated_trees[i+1][j+2..-1]
+        
+        left_score = (i+1) - (left.rindex{|l| l >= tree} || 0)
+        right_score = right.find_index{|r| r >= tree} ? right.find_index{|r| r >= tree} + 1 : row.size - (i+2)
+        up_score = (j+1) - (up.rindex{|u| u >= tree} || 0)
+        down_score = down.find_index{|d| d >= tree} ? down.find_index{|d| d >= tree} + 1: rotated_trees.size - (j+2)
+        scores.push(left_score*right_score*up_score*down_score)
+      end
+    end
+    scores
+    end
+
     def part1
       count_exterior + count_interior
     end
 
     def part2
-      nil
+      scores = scenic_scores
+      scores.max
     end
   end
 end
