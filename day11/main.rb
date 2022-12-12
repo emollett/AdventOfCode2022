@@ -1,10 +1,11 @@
 module Day11
   class Main
-    attr_accessor :monkey_input, :monkeys
+    attr_accessor :monkey_input, :monkeys, :worry_reduction
 
     def initialize(input)
       @monkey_input = input.split("\n\n").map { |a| a.split("\n") }
       @monkeys = []
+      @worry_reduction = 1
     end
 
     def starting_monkeys
@@ -12,7 +13,7 @@ module Day11
         name = monkey[0].gsub(":", "")
         items = monkey[1].scan(/\d+/).map(&:to_i)
         operator = monkey[2].gsub('Operation: new = old ', '').split[0]
-        operation_value = monkey[2].gsub('Operation: new = old ', '').split[1].to_i
+        operation_value = monkey[2].gsub('Operation: new = old ', '').split[1]
         test = monkey[3].scan(/\d+/)[0].to_i
         ifTrue = monkey[4].scan(/\d+/)[0].to_i
         ifFalse = monkey[5].scan(/\d+/)[0].to_i
@@ -22,12 +23,18 @@ module Day11
     end
 
     def take_turns(turns)
+      # This reduces the worry number which would otherwise get too high
+      # By picking the lowest common multiple of the test values, the test to see if it is still divisible still works
+      # With thanks to other peoples examples!
+      lowest_common_multiple = monkeys.map{|x| x[:test]}.reduce(1, :lcm)
+      
       turns.times do
         monkeys.each do |monkey|
           monkey[:items].each do |item|
-            item = item.public_send(monkey[:operator], monkey[:operation_value])
-            item = item / 3
-            if (item % monkey[:test]).zero?
+            monkey[:operation_value] == 'old' ? value = item : value = monkey[:operation_value].to_i
+            item = item.public_send(monkey[:operator], value) % lowest_common_multiple
+            item = item / worry_reduction
+            if item % monkey[:test] == 0
               monkeys.select{|m| m[:name] == "Monkey #{monkey[:ifTrue]}"}[0][:items].push(item)
             else
               monkeys.select{|m| m[:name] == "Monkey #{monkey[:ifFalse]}"}[0][:items].push(item)
@@ -40,11 +47,19 @@ module Day11
     end
 
     def part1
-      nil
+      @worry_reduction = 3
+      starting_monkeys
+      take_turns(20)
+      inspected = monkeys.map{|x| x[:items_inspected]}.sort.reverse
+      inspected[0] * inspected[1]
     end
 
     def part2
-      nil
+      @worry_reduction = 1
+      starting_monkeys
+      take_turns(10000)
+      inspected = monkeys.map{|x| x[:items_inspected]}.sort.reverse
+      inspected[0] * inspected[1]
     end
   end
 end

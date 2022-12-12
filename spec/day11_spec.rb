@@ -19,27 +19,36 @@ describe Day11::Main do
       puzzle.starting_monkeys
       puzzle.take_turns(1)
       expect(puzzle.monkeys[0][:items]).to eq([20, 23, 27, 26])
+      expect(puzzle.monkeys[1][:items]).to eq([2080, 25, 167, 207, 401, 1046])
     end
 
     it 'takes 20 turns' do
       puzzle.starting_monkeys
       puzzle.take_turns(20)
       expect(puzzle.monkeys[0][:items]).to eq([10, 12, 14, 26, 34])
-      # expect(puzzle.monkeys[1][:items]).to eq([245, 93, 53, 199, 115])
+      expect(puzzle.monkeys[1][:items]).to eq([245, 93, 53, 199, 115])
     end
 
-    # it 'counts how many times monkeys have inspected items' do
-    #   puzzle.starting_monkeys
-    #   puzzle.take_turns(20)
-    #   expect(puzzle.monkeys[0][:items_inspected]).to eq(101)
-    # end
+    it 'counts how many times monkeys have inspected items' do
+      puzzle.starting_monkeys
+      puzzle.take_turns(20)
+      expect(puzzle.monkeys[0][:items_inspected]).to eq(101)
+    end
+
+    it 'multiplies the top two monkeys' do
+      expect(puzzle.part1).to eq(10605)
+    end
+
+    it 'gets really big' do
+      expect(puzzle.part2).to eq(2713310158)
+    end
   end
 
   context 'when using the real data' do
     let(:puzzle) { described_class.new(input) }
 
     it 'returns the answer to part 1' do
-      expect(puzzle.part1).to eq(nil)
+      expect(puzzle.part1).to eq(107822)
     end
 
     it 'returns the answer to part 2' do
