@@ -12,7 +12,7 @@ describe Day11::Main do
     it 'gets the monkeys' do
       puzzle.starting_monkeys
       expect(puzzle.monkeys[0]).to eq({ ifFalse: 3, ifTrue: 2, items: [79, 98], items_inspected: 0, name: 'Monkey 0',
-                                        operation_value: 19, operator: '*', test: 23 })
+                                        operation_value: "19", operator: '*', test: 23 })
     end
 
     it 'takes a turn' do
