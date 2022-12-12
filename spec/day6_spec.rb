@@ -10,7 +10,7 @@ describe Day6::Main do
     let(:puzzle) { described_class.new(test_input) }
 
     it 'gets the input' do
-      expect(puzzle.signal).to eq('bvwbjplbgvbhsrlpgdmjqwftvncz')
+      expect(puzzle.signal).to eq(%w[b v w b j p l b g v b h s r l p g d m j q w f t v n c z])
     end
 
     it 'finds the index of the start marker' do

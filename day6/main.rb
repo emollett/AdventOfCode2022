@@ -3,14 +3,13 @@ module Day6
     attr_accessor :signal
 
     def initialize(input)
-      @signal = input
+      @signal = input.chars
     end
 
     def find_start(size)
-      signal_array = signal.chars
-      signal_array.to_enum.with_index(size - 1) do |_c, i|
-        quartet = signal_array[i - (size - 1)..i]
-        return i + 1 if quartet.uniq.size == size
+      signal.to_enum.with_index(size - 1) do |_c, i|
+        sequence = signal[i - (size - 1)..i]
+        return i + 1 if sequence.uniq.size == size
       end
       nil
     end
