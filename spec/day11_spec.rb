@@ -52,7 +52,7 @@ describe Day11::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq(27267163742)
     end
   end
 end
