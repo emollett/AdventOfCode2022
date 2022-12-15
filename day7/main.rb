@@ -1,11 +1,10 @@
 module Day7
   class Main
-    attr_accessor :directory_contents, :directories, :directory_info
+    attr_accessor :directory_contents, :directories
 
     def initialize(input)
       @directory_contents = input.split("$ cd").map{ |a| a.split("\n")}
       @directories = input.split("\n").select{ |line| line.include? "dir"}
-      @directory_info = {}
     end
 
     def get_size_of_directory(directory)
@@ -23,59 +22,29 @@ module Day7
       end
       if directories.size > 0
         sub_directories.each do |sub_directory|
-          pp sub_directory
           file_sizes += get_size_of_directory(sub_directory)
         end
       else  
         return file_sizes
       end
+      file_sizes
     end
 
     def calculate_all_directories
       all_sizes = []
+      directories.unshift('dir /')
       directories.each do |directory|
         all_sizes.push(get_size_of_directory(directory))
+        directory_contents.select{ |content| content[0] == " " + directory.split(" ")[1]}[0][0].sub(directory.split(" ")[1], "")
       end
       all_sizes
     end
 
-
-    # def add_files
-    #   directories.reverse.each do |directory|
-    #     name = directory.split(" ")[1]
-    #     contents = directory_contents.select{ |directory| directory[0] == " " + name}
-    #     file_sizes = 0
-    #     directories = []
-    #     contents[0].each do |content|
-    #       if Integer(content[0], exception: false)
-    #         file_sizes += content.split(" ")[0].to_i
-    #       end
-    #       if content.split(" ")[0] == "dir"
-    #         directories.push(content)
-    #       end  
-    #     end
-    #     # this is overwriting the info for an identically named directory
-    #     directory_info[directory] = {file_sizes: file_sizes, inner_directories: directories}
-    #   end
-    #   directory_info
-    # end
-
-    # def add_inner_directory_sizes
-    #   directories.reverse.each do |directory_name|
-    #     directory_info[directory_name][:inner_directories].each do |d|
-    #       inner_directory_size = directory_info[d][:file_sizes]
-    #       directory_info[directory_name][:file_sizes] += inner_directory_size
-    #     end
-    #   end
-    #   directory_inffo
-    # end
-
     def part1
-      add_files
-      add_inner_directory_sizes
+      sizes = calculate_all_directories
       total = 0
-      directory_inffo.each do |key, directory|
-        total += directory[:file_sizes] if directory[:file_sizes] <= 100000 
+      sizes.each do |size|
+        total += size if size <= 100000 
       end
       total
     end

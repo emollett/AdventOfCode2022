@@ -9,10 +9,6 @@ describe Day7::Main do
   context 'when using the test data' do
     let(:puzzle) { described_class.new(test_input) }
 
-    # get directory
-    # get files and sub directories (sub directory = next of name)
-    # directory size = size of everything underneath? until you hit something with no directories
-
     it 'gets the directories' do
       expect(puzzle.directories).to eq(["dir a", "dir d", "dir e"])
     end
@@ -27,17 +23,8 @@ describe Day7::Main do
       [" d", "$ ls", "4060174 j", "8033020 d.log", "5626152 d.ext", "7214296 k"]])
     end
 
-    # it 'adds the file sizes for directories with only files' do
-    #   expect(puzzle.add_files["dir d"][:file_sizes]).to eq(24933642)
-    # end
-
-    # it 'adds the file sizes for directories containing other directories' do
-    #   puzzle.add_files
-    #   expect(puzzle.add_inner_directory_sizes["dir a"][:file_sizes]).to eq(94853)
-    # end
-
-    it 'adds up the big directories' do
-      expect(puzzle.calculate_all_directories).to eq(95437)
+    it 'gets the sizes of the directories' do
+      expect(puzzle.calculate_all_directories).to eq([94853, 24933642, 584])
     end
 
     it 'adds up the big directories' do
@@ -52,6 +39,7 @@ describe Day7::Main do
   context 'when using the real data' do
     let(:puzzle) { described_class.new(input) }
 
+    # failing because it finds a higher up directory?
     it 'returns the answer to part 1' do
       expect(puzzle.part1).to eq(nil)
     end
