@@ -1,50 +1,36 @@
 module Day7
   class Main
-    attr_accessor :directory_contents, :directories
+    attr_accessor :directory_contents, :directory_stack, :file_size_stack, :complete_directory_sizes
 
     def initialize(input)
-      @directory_contents = input.split("$ cd").map{ |a| a.split("\n")}
-      @directories = input.split("\n").select{ |line| line.include? "dir"}
+      @directory_contents = input.split("\n")
+      @directory_stack = []
+      @file_size_stack = []
+      @complete_directory_sizes = []
     end
 
-    def get_size_of_directory(directory)
-      name = directory.split(" ")[1]
-      contents = directory_contents.select{ |directory| directory[0] == " " + name}
-      file_sizes = 0
-      sub_directories = []
-      contents[0].each do |content|
-        if Integer(content[0], exception: false)
-          file_sizes += content.split(" ")[0].to_i
+    def scan_directory
+      directory_contents.each do |line|
+        if line.include?('$ cd ..')
+          directory_stack.pop
+          complete_directory_sizes.push(file_size_stack.pop)
+        elsif line.include?('$ cd')
+          directory_stack.push(line)
+          file_size_stack.push(0)
         end
-        if content.split(" ")[0] == "dir"
-          sub_directories.push(content)
-        end  
-      end
-      if directories.size > 0
-        sub_directories.each do |sub_directory|
-          file_sizes += get_size_of_directory(sub_directory)
-        end
-      else  
-        return file_sizes
-      end
-      file_sizes
-    end
+        next unless Integer(line.split[0], exception: false)
 
-    def calculate_all_directories
-      all_sizes = []
-      directories.unshift('dir /')
-      directories.each do |directory|
-        all_sizes.push(get_size_of_directory(directory))
-        directory_contents.select{ |content| content[0] == " " + directory.split(" ")[1]}[0][0].sub(directory.split(" ")[1], "")
+        file_size = line.split[0].to_i
+        file_size_stack.map! { |s| s + file_size }
       end
-      all_sizes
+      (complete_directory_sizes << file_size_stack).flatten!
     end
 
     def part1
-      sizes = calculate_all_directories
+      scan_directory
       total = 0
-      sizes.each do |size|
-        total += size if size <= 100000 
+      complete_directory_sizes.each do |size|
+        total += size if size <= 100_000
       end
       total
     end
