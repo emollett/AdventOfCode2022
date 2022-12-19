@@ -36,7 +36,11 @@ module Day7
     end
 
     def part2
-      nil
+      scan_directory
+      unused_space = 70_000_000 - complete_directory_sizes.max
+      space_to_free_up = 30_000_000 - unused_space
+      big_enough_directories = complete_directory_sizes.select { |d| d > space_to_free_up }
+      big_enough_directories.min
     end
   end
 end

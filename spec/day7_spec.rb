@@ -33,6 +33,9 @@ describe Day7::Main do
       expect(puzzle.part1).to eq(95_437)
     end
 
+    it 'finds the smallest directory above 30000000' do
+      expect(puzzle.part2).to eq(24_933_642)
+    end
   end
 
   context 'when using the real data' do
@@ -43,7 +46,7 @@ describe Day7::Main do
     end
 
     it 'returns the answer to part 2' do
-      expect(puzzle.part2).to eq(nil)
+      expect(puzzle.part2).to eq(4_978_279)
     end
   end
 end
